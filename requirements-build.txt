@@ -1,0 +1,5 @@
+# Build Mode ML automation
+kaggle==2.2.4
+pandas>=2.0
+scikit-learn>=1.4
+joblib>=1.3

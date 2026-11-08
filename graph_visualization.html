@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WINTER Neo4j Architecture</title>
+    <script type="module">
+        import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+        mermaid.initialize({ 
+            startOnLoad: true, 
+            theme: 'dark',
+            securityLevel: 'loose',
+            flowchart: { useMaxWidth: false, htmlLabels: true }
+        });
+    </script>
+    <style>
+        :root {
+            --bg-color: #0f172a;
+            --card-bg: rgba(30, 41, 59, 0.7);
+            --text-color: #f8fafc;
+            --accent: #3b82f6;
+        }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background-color: var(--bg-color);
+            background-image: 
+                radial-gradient(at 0% 0%, rgba(59, 130, 246, 0.15) 0px, transparent 50%),
+                radial-gradient(at 100% 100%, rgba(139, 92, 246, 0.15) 0px, transparent 50%);
+            color: var(--text-color);
+            margin: 0;
+            padding: 2rem;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 2rem;
+            animation: fadeIn 1s ease-out;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            background: linear-gradient(to right, #60a5fa, #a78bfa);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 0.5rem;
+        }
+
+        .header p {
+            color: #94a3b8;
+            font-size: 1.1rem;
+        }
+
+        .glass-container {
+            background: var(--card-bg);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 24px;
+            padding: 2rem;
+            width: 95%;
+            max-width: 1400px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            display: flex;
+            justify-content: center;
+            overflow-x: auto;
+            animation: slideUp 0.8s ease-out forwards;
+        }
+
+        .mermaid {
+            display: flex;
+            justify-content: center;
+            min-width: 1000px;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Custom scrollbar for glass container */
+        .glass-container::-webkit-scrollbar {
+            height: 10px;
+        }
+        .glass-container::-webkit-scrollbar-track {
+            background: rgba(0,0,0,0.2);
+            border-radius: 5px;
+        }
+        .glass-container::-webkit-scrollbar-thumb {
+            background: rgba(255,255,255,0.2);
+            border-radius: 5px;
+        }
+        .glass-container::-webkit-scrollbar-thumb:hover {
+            background: rgba(255,255,255,0.3);
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <div class="header">
+        <h1>WINTER Architecture Map</h1>
+        <p>Live Neo4j Knowledge & State Machine Topology</p>
+    </div>
+
+    <div class="glass-container">
+        <div class="mermaid">
+graph TD
+    %% Central Hub
+    himanshu(("User / System Core<br>himanshu"))
+    
+    %% Semantic & Factual Data
+    subgraph knowledge["Knowledge & Memory"]
+        entity_node["Entity Nodes (595)<br>Contacts, Projects, Topics<br>(e.g., 'akka', 'Outrun')"]
+        memory_node["Memory Nodes (1,350)<br>Embedded Text, Hybrid Search"]
+        import_run["ImportRun (1)"]
+    end
+    
+    %% Conversational State
+    subgraph conversation["Conversation Architecture"]
+        session["DialogueSession (3)"]
+        turn["DialogueTurn (26)<br>Chronological Chat History"]
+    end
+    
+    %% Operations & Triggers
+    subgraph core["Core Orchestrator (State Machine)"]
+        task["TaskCheckpoint (21)<br>Durable Plans"]
+        action["ActionLog (16)<br>Tool Executions"]
+        alarm["Alarm (1)<br>Pending Triggers"]
+        notif["Notification (28)"]
+        handle["Handle (13)<br>Private Payloads (e.g. Emails)"]
+        approval["Approval (6)"]
+    end
+    
+    %% Relationships to subgraphs (pointing to nodes to be safe)
+    himanshu -.-> entity_node
+    himanshu -.-> session
+    himanshu -.-> task
+    
+    %% Factual Edges
+    entity_node <-->|FACT 1,322 edges| entity_node
+    entity_node -->|HAS_MEMORY| memory_node
+    
+    %% Dialogue Edges
+    session -->|CONTAINS 26 edges| turn
+    turn -->|NEXT 23 edges| turn
+    turn -->|TRIGGERS| action
+    turn -->|SPAWNS| task
+    
+    %% State Edges
+    task -->|REQUIRES| approval
+    task -->|GENERATES| handle
+    task -->|GENERATES| alarm
+    task -->|DISPATCHES| notif
+    action -->|LOGGED_IN| turn
+    
+    %% Styling
+    style himanshu fill:#f97316,stroke:#c2410c,stroke-width:3px,color:#fff
+    
+    style entity_node fill:#3b82f6,stroke:#1d4ed8,stroke-width:2px,color:#fff
+    style memory_node fill:#3b82f6,stroke:#1d4ed8,stroke-width:2px,color:#fff
+    style import_run fill:#3b82f6,stroke:#1d4ed8,stroke-width:2px,color:#fff
+    
+    style session fill:#10b981,stroke:#047857,stroke-width:2px,color:#fff
+    style turn fill:#10b981,stroke:#047857,stroke-width:2px,color:#fff
+    
+    style task fill:#8b5cf6,stroke:#6d28d9,stroke-width:2px,color:#fff
+    style action fill:#8b5cf6,stroke:#6d28d9,stroke-width:2px,color:#fff
+    style alarm fill:#ef4444,stroke:#b91c1c,stroke-width:2px,color:#fff
+    style notif fill:#8b5cf6,stroke:#6d28d9,stroke-width:2px,color:#fff
+    style handle fill:#8b5cf6,stroke:#6d28d9,stroke-width:2px,color:#fff
+    style approval fill:#8b5cf6,stroke:#6d28d9,stroke-width:2px,color:#fff
+        </div>
+    </div>
+
+</body>
+</html>

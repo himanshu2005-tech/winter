@@ -1,0 +1,7 @@
+# Local screen and camera perception.
+ultralytics>=8.4,<9
+insightface==2.1
+onnxruntime>=1.20,<2
+opencv-python>=4.10,<6
+mediapipe==1.1.1
+cryptography>=45,<51

@@ -1,0 +1,9 @@
+[extend]
+useDefault = true
+
+[[allowlists]]
+description = "Mermaid vendor parser keyCount expression is not an API credential"
+condition = "AND"
+paths = ['''(^|/)vanta-mobile/public/mermaid\.min\.js$''']
+regexTarget = "match"
+regexes = ['''m\.keyCount,''']
