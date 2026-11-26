@@ -1,0 +1,4 @@
+[autorun]
+open=WINTER_SYSTEM\WINTER_SYSTEM.exe
+action=Start WINTER Security Protocol
+label=WINTER Encrypted Drive

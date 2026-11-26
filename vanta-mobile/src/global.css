@@ -1,0 +1,29 @@
+:root {
+  --font-display:
+    Spline Sans, Inter, ui-sans-serif, system-ui, sans-serif, Apple Color Emoji, Segoe UI Emoji,
+    Segoe UI Symbol, Noto Color Emoji;
+  --font-mono:
+    ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, Liberation Mono, Courier New, monospace;
+  --font-rounded: 'SF Pro Rounded', 'Hiragino Maru Gothic ProN', Meiryo, 'MS PGothic', sans-serif;
+  --font-serif: Georgia, 'Times New Roman', serif;
+}
+
+* { box-sizing: border-box; }
+body { background: #07080a; color: #f6f7fa; }
+button, input, textarea { font: inherit; }
+.vanta-report { color: #e9edf5; font: 15px/1.65 Inter, system-ui, sans-serif; overflow-wrap: anywhere; }
+.vanta-report > :first-child { margin-top: 0; }
+.vanta-report > :last-child { margin-bottom: 0; }
+.vanta-report h1, .vanta-report h2, .vanta-report h3 { color: #fff; line-height: 1.25; margin: 1.15em 0 .55em; }
+.vanta-report h1 { font-size: 1.35rem; } .vanta-report h2 { font-size: 1.12rem; } .vanta-report h3 { font-size: 1rem; }
+.vanta-report p, .vanta-report ul, .vanta-report ol { margin: .6em 0; }
+.vanta-report a { color: #58a6ff; text-decoration: none; }
+.vanta-report table { width: 100%; border-collapse: collapse; margin: 14px 0; font-size: 13px; display: block; overflow-x: auto; }
+.vanta-report th, .vanta-report td { border: 1px solid #2a2e37; padding: 9px 11px; text-align: left; white-space: nowrap; }
+.vanta-report th { background: #171a21; color: #fff; }
+.vanta-report pre, .vanta-code { overflow-x: auto; border: 1px solid #242832; border-radius: 12px; background: #090b0f; padding: 13px; }
+.vanta-report :not(pre) > code { color: #b9d8ff; background: #171a21; border-radius: 5px; padding: 2px 5px; }
+.vanta-report blockquote { border-left: 3px solid #3d8cff; color: #aeb7c7; margin-left: 0; padding-left: 14px; }
+.vanta-diagram { overflow-x: auto; padding: 10px 0; }
+.vanta-diagram svg { max-width: 100%; height: auto; }
+.katex-display { overflow-x: auto; overflow-y: hidden; }

@@ -1,0 +1,3 @@
+# Stock Firefox automation used by WINTER_BROWSER_ENGINE=firefox-real.
+# Selenium Manager supplied with Selenium resolves geckodriver automatically.
+selenium>=4.25,<5

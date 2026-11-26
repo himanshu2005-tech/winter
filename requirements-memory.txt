@@ -1,0 +1,5 @@
+neo4j==6.3.1
+numpy>=1.26,<3
+onnxruntime>=1.20,<2
+transformers>=4.45,<6
+keyring>=25,<26

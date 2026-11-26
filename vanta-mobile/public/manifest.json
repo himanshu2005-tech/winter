@@ -1,0 +1,25 @@
+{
+  "name": "VANTA Personal Assistant",
+  "short_name": "VANTA",
+  "description": "Private mobile access to your VANTA assistant.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#07080a",
+  "theme_color": "#07080a",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/vanta-icon.png",
+      "sizes": "256x256",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/vanta-icon-maskable.png",
+      "sizes": "256x256",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ]
+}
